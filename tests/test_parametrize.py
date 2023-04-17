@@ -1,5 +1,7 @@
 import pytest
 
+from src.enum.sets import FACTORIAL
+
 
 class TestParametrize:
 
@@ -33,7 +35,7 @@ class TestParametrize:
         assert self.factorial(6) == 720
 
     # @pytest.mark.parametrize(
-    #     "n, expected_factorial",
+    #     "value, expected_factorial",
     #     [
     #         (0, 1),
     #         (1, 1),
@@ -44,7 +46,8 @@ class TestParametrize:
     #         (6, 720)
     #     ],
     # )
-    # @pytest.mark.parametrize('value, expected_factorial', FACTORIAL)
+    @pytest.mark.parametrize('value, expected_factorial', FACTORIAL)
     # @pytest.mark.parametrize('value, expected_factorial', ((1, 1), (0, 1)), ids=['One', 'Zero'])
     def test_factorial(self, value, expected_factorial):
         assert self.factorial(value) == expected_factorial
+

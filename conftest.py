@@ -1,4 +1,5 @@
 import os
+from random import randint
 from typing import Dict
 
 import dotenv
@@ -30,3 +31,12 @@ def get_created_board() -> Dict:
     board = ApiActions().create_board('Fixture board')
     yield board
     ApiActions().delete_board(board['id'])
+
+
+@pytest.fixture(scope='session')
+def generate_random_number() -> int:
+    return randint(10, 100)
+
+@pytest.fixture(scope='session')
+def create_company():
+    return 1

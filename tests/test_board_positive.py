@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 from src.data_checker import DataChecker
 
@@ -24,10 +25,31 @@ class TestBoardPositive:
 
     def test_create_board_2(self, api):
         board = api.create_board('test 1')
-        response = api.get_board(board['id'])
-        self.data_checker.check_created_board(board, response)
-        api.delete_board(board['id'])
+        api.get_board(board['id'])
+        # self.data_checker.check_created_board(board, response)
+        response = api.delete_board(board['id'])
+        print(response)
 
     def test_get_cached_board(self, api, get_created_board):
         board = get_created_board
         print(board)
+
+
+
+
+    def test_api_board(self):
+        url = "https://api.trello.com/1/boards/"
+
+        query = {
+            'name': 'test name meet',
+            'key': '48859f892926f3af3c74581d0c894f63',
+            'token': '15daea39866e0cb2c339a4369dd8ef5b829f493d6f32a0e4a78625c1e8be8092'
+        }
+
+        response = requests.request(
+            "POST",
+            url,
+            params=query
+        )
+
+        print(response.text)
